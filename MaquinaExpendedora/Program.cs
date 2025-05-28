@@ -25,15 +25,40 @@ class Program
     static int[] monedasSoportadas = { 5, 10, 50, 100, 200 };
    
     
-    static void Maquina(string name,int n,Dictionary<string,int> producto)
+    static void Maquina(string name,int[]n,Dictionary<string,int> producto)
     {
+       
+        for (int i = 0; i < n.Length; i++)
+           {
+             if (!monedasSoportadas.Contains(n[i]))
+               {
+                 Console.WriteLine("La moneda " + n[i] + " no es soportada");
+                 Console.WriteLine("se le devolvera su dinero");
+                  break;
+                     
+                }
+            }
+
+        
+        if (!producto.ContainsKey(name))
+        {
+            var total = n.Sum();
+            Console.WriteLine("El producto no existe");
+            Console.WriteLine("se le devolvera su dinero" + total);
+            return;
+        }
+
+        
         
         foreach (var item in producto) {
             if (name.Equals(item.Key)) {
-                if (n >= item.Value) {
-                   int total = n - item.Value;
+                var total =n.Sum();
+                if (total >= item.Value) {
+                   int preciofinal = total - item.Value;
                    List<int>vuelto=devolucion(total);
-                   Console.WriteLine("su vuelto es " + total );
+                    Console.WriteLine("Su producto es " + item.Key + " y el precio es " + item.Value);
+                    Console.WriteLine("su vuelto es " + preciofinal );
+                
                     foreach (var v in vuelto)
                     {
                         Console.WriteLine("sera devuelto en "+v);
@@ -61,6 +86,8 @@ class Program
 
     static void Main(string[] args)
     {
+
+        int[] ingreso = { 5, 10, 50, 100, 200 };
         Dictionary<string, int> productos = new Dictionary<string, int>()
     {
         {"Cockie",50 },
@@ -68,7 +95,7 @@ class Program
         {"Snack",200 }
 
     };
-        Maquina("Cockie", 500, productos);
+        Maquina("Cockie", ingreso, productos);
     }
 
 }
