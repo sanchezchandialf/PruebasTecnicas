@@ -10,13 +10,26 @@
 
 
 
+using Microsoft.VisualBasic;
+
 public class Program
 {
 
     public static void Main()
     {
+        List<char> contraseña = new List<char>();
         Random rand = new Random();
         int numero = rand.Next(8, 16);
         
+        for (int i = 0; i <numero ; i++)
+        {
+            var randomnum = rand.Next(8, 300);
+            var clave = Convert.ToChar(randomnum);
+            contraseña.Add(clave);
+
+        }
+        var final=String.Concat(contraseña);
+        Console.WriteLine(final);
+
     }
 }
